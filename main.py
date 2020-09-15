@@ -49,6 +49,5 @@ def get_content (html):
     print(memes)
     return (memes)
 
-print('you lox')
 
 bot.polling()
