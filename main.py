@@ -18,7 +18,7 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     if message.text.lower() == 'привет':
-        bot.send_message(message.chat.id, 'Привет, тут скоро будут мемы!')
+        bot.send_message(message.chat.id, '!!!Привет, тут скоро будут мемы!')
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, get_memes())
     elif message.text.lower() == 'расскажи о себе':
