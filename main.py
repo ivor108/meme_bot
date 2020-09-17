@@ -17,7 +17,7 @@ def start_message(message):
     bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
 
 @bot.message_handler(content_types=['text'])
-def send_text(message):
+def send_text(message, massage=None):
     if message.text.lower() == 'привет':
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял')
     elif message.text.lower() == 'мем':
@@ -62,7 +62,7 @@ def rate(): # Понятия не имею зачем это нужно
 	USD = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_USD.text).group(1)
 	EUR = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_EUR.text).group(1)
 	BTC = re.search('id="last_last" dir="ltr">([\w\W]*?)<', req_BTC.text).group(1)
-	return '$ {}'.format(USD), '€ {}'.format(EUR), 'BTC {}'.format(BTC)
+	return '$ {}'.format(USD)#, '€ {}'.format(EUR), 'BTC {}'.format(BTC)
 
 
 
