@@ -37,7 +37,7 @@ def send_text(message):
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, rate())
     elif message.text.lower() == 'расскажи о себе':
-        bot.send_message(message.chat.id, 'Обновление от 18.09.20  -Теперь можно смотреть курсы валют. -Количество подгружаемых мемов увеличено. -Скорость загрузки мема увеличена.')
+        bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
     try:
@@ -108,7 +108,7 @@ def get_memes():
             memes.append(str(mem))
             print(mem)
 
-    return (random.choice(memes))
+    return (memes.pop())
 
 
 def rate(): # Понятия не имею зачем это нужно
