@@ -89,7 +89,7 @@ def get_memes():
             memes.append(str(mem))
             print(mem)
 
-    return (random.choice(memes))
+    return (memes.pop())
 
 
 def rate(): # Понятия не имею зачем это нужно
