@@ -19,10 +19,10 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message, massage=None):
     if message.text.lower() == 'привет':
-        bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял')
+        bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, get_memes())
-    elif massage.text.lower() == '/rate':
+    elif massage.text.lower() == 'rate':
     	bot.send_message(message.chat.id, rate() )
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Я новый бот! Я буду скидывать мемы, если ты попросишь. Пока я могу скидвать только 4-5 мема, но каждые 2-3 часа этот список обновляется!')
