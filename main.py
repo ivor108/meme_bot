@@ -62,7 +62,7 @@ def rate(): # Понятия не имею зачем это нужно
     USD = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_USD.text).group(1)
     EUR = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_EUR.text).group(1)
     BTC = re.search('id="last_last" dir="ltr">([\w\W]*?)<', req_BTC.text).group(1)
-    return str('$\s {}'.format(USD))+str('€\s {}'.format(EUR))+str('BTC {}'.format(BTC))
+    return str('$\r {}'.format(USD))+str('€\r {}'.format(EUR))+str('BTC {}'.format(BTC))
 
 
 
