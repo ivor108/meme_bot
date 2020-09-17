@@ -52,7 +52,7 @@ def get_content (html):
     print(memes)
     return (memes)
 
-def rate(): # Понятия не имею зачем это нужно
+def rate(): # Понятия не имею зачем это нужно , '€ {}'.format(EUR), 'BTC {}'.format(BTC)
 	USD_URL = 'https://finance.rambler.ru/currencies/USD/'
 	EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
 	BTC_URL = 'https://ru.investing.com/crypto/bitcoin/btc-usd'
@@ -62,7 +62,7 @@ def rate(): # Понятия не имею зачем это нужно
 	USD = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_USD.text).group(1)
 	EUR = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_EUR.text).group(1)
 	BTC = re.search('id="last_last" dir="ltr">([\w\W]*?)<', req_BTC.text).group(1)
-	return '$ {}'.format(USD)#, '€ {}'.format(EUR), 'BTC {}'.format(BTC)
+	return '$ {}'.format(USD)
 
 
 
