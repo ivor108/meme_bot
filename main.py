@@ -2,6 +2,7 @@ import telebot
 import random
 import requests
 from bs4 import BeautifulSoup
+import re
 
 URL = 'https://www.reddit.com/r/memes/'
 HEADERS = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -21,6 +22,8 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял')
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, get_memes())
+    elif massage.text.lower() == '/rate':
+    	bot.send_message(message.chat.id, rate() )
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Я новый бот! Я буду скидывать мемы, если ты попросишь. Пока я могу скидвать только 4-5 мема, но каждые 2-3 часа этот список обновляется!')
     else:
@@ -48,6 +51,16 @@ def get_content (html):
             memes.append(str(items.get('src')))
     print(memes)
     return (memes)
+
+def rate(): # Понятия не имею зачем это нужно, но можно добавить биткойн чтоб Серега чекал)) 
+	USD_URL = 'https://finance.rambler.ru/currencies/USD/'
+	EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
+	req_USD = requests.get(USD_URL)
+	req_EUR = requests.get(EUR_URL)
+	USD = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_USD.text).group(1)
+	EUR = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_EUR.text).group(1)
+	return '$ {}'.format(USD), '€ {}'.format(EUR)
+
 
 
 
