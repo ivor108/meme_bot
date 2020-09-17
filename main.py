@@ -17,12 +17,12 @@ def start_message(message):
     bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
 
 @bot.message_handler(content_types=['text'])
-def send_text(message, massage=None):
+def send_text(message):
     if message.text.lower() == 'привет':
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, get_memes())
-    elif massage.text.lower() == 'rate':
+    elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, rate())
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Я новый бот! Я буду скидывать мемы, если ты попросишь. Пока я могу скидвать только 4-5 мема, но каждые 2-3 часа этот список обновляется!')
@@ -52,7 +52,7 @@ def get_content (html):
     print(memes)
     return (memes)
 
-def rate(): # Понятия не имею зачем это нужно , '€ {}'.format(EUR), 'BTC {}'.format(BTC)
+def rate(): # Понятия не имею зачем это нужно
     USD_URL = 'https://finance.rambler.ru/currencies/USD/'
     EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
     BTC_URL = 'https://ru.investing.com/crypto/bitcoin/btc-usd'
@@ -62,7 +62,7 @@ def rate(): # Понятия не имею зачем это нужно , '€ {
     USD = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_USD.text).group(1)
     EUR = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_EUR.text).group(1)
     BTC = re.search('id="last_last" dir="ltr">([\w\W]*?)<', req_BTC.text).group(1)
-    return '$ {}'.format(USD)
+    return str('$ {}'.format(USD))+str('€ {}'.format(EUR))+str('BTC {}'.format(BTC))
 
 
 
