@@ -23,7 +23,7 @@ def send_text(message, massage=None):
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, get_memes())
     elif massage.text.lower() == 'rate':
-    	bot.send_message(message.chat.id, rate() )
+        bot.send_message(message.chat.id, rate())
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Я новый бот! Я буду скидывать мемы, если ты попросишь. Пока я могу скидвать только 4-5 мема, но каждые 2-3 часа этот список обновляется!')
     else:
@@ -31,7 +31,7 @@ def send_text(message, massage=None):
 
 
 def get_html(url, params=None):
-    r = requests.get(url, headers=HEADERS, params=params)
+    r = requests.get(url, headers=HEADERS)
     return r
 
 def get_memes():
@@ -53,16 +53,16 @@ def get_content (html):
     return (memes)
 
 def rate(): # Понятия не имею зачем это нужно , '€ {}'.format(EUR), 'BTC {}'.format(BTC)
-	USD_URL = 'https://finance.rambler.ru/currencies/USD/'
-	EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
-	BTC_URL = 'https://ru.investing.com/crypto/bitcoin/btc-usd'
-	req_USD = requests.get(USD_URL)
-	req_EUR = requests.get(EUR_URL)
-	req_BTC = requests.get(BTC_URL,  headers=HEADERS)
-	USD = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_USD.text).group(1)
-	EUR = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_EUR.text).group(1)
-	BTC = re.search('id="last_last" dir="ltr">([\w\W]*?)<', req_BTC.text).group(1)
-	return '$ {}'.format(USD)
+    USD_URL = 'https://finance.rambler.ru/currencies/USD/'
+    EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
+    BTC_URL = 'https://ru.investing.com/crypto/bitcoin/btc-usd'
+    req_USD = requests.get(USD_URL)
+    req_EUR = requests.get(EUR_URL)
+    req_BTC = requests.get(BTC_URL,  headers=HEADERS)
+    USD = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_USD.text).group(1)
+    EUR = re.search('<div class="finance-currency-plate__currency">([\w\W]*?)<\/div>', req_EUR.text).group(1)
+    BTC = re.search('id="last_last" dir="ltr">([\w\W]*?)<', req_BTC.text).group(1)
+    return '$ {}'.format(USD)
 
 
 
