@@ -3,10 +3,21 @@ import random
 import requests
 from bs4 import BeautifulSoup
 import re
+from selenium import webdriver
+import os
+import time
 
 URL = 'https://www.reddit.com/r/memes/'
 HEADERS = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'}
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+driver.get(URL)
 
 bot = telebot.TeleBot('1345384313:AAFfCxtgq-iici7UBN0C1A4YZ-ylxs1Z_cY')
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
@@ -29,11 +40,11 @@ def send_text(message):
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
-
+'''
+#Старые методы для парсинга
 def get_html(url, params=None):
     r = requests.get(url, headers=HEADERS)
     return r
-
 def get_memes():
 
     html = get_html(URL)
@@ -42,7 +53,6 @@ def get_memes():
     else:
         print('Ошибка!')
         return (-1)
-
 def get_content (html):
     soup = BeautifulSoup(html, 'html.parser')
     memes = []
@@ -51,6 +61,36 @@ def get_content (html):
             memes.append(str(items.get('src')))
     print(memes)
     return (memes)
+'''
+
+def get_memes():
+    memes = []
+    SCROLL_PAUSE_TIME = 0.5
+    last_height = driver.execute_script("return document.body.scrollHeight")
+
+    while True:
+        # Scroll down to bottom
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        # Wait to load page
+        time.sleep(SCROLL_PAUSE_TIME)
+
+        # Calculate new scroll height and compare with last scroll height
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+
+    elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
+
+    for element in elements:
+        mem = element.get_attribute('src')
+        if str(mem).count('external') == 0:
+            memes.append(str(mem))
+            print(mem)
+
+    return (random.choice(memes))
+
 
 def rate(): # Понятия не имею зачем это нужно
     USD_URL = 'https://finance.rambler.ru/currencies/USD/'
