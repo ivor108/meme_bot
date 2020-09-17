@@ -10,7 +10,7 @@ HEADERS = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,imag
 
 bot = telebot.TeleBot('1345384313:AAFfCxtgq-iici7UBN0C1A4YZ-ylxs1Z_cY')
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
-keyboard1.row('Привет', 'мем', 'расскажи о себе')
+keyboard1.row('Привет', 'мем', 'расскажи о себе', 'rate')
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
@@ -25,7 +25,7 @@ def send_text(message):
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, rate())
     elif message.text.lower() == 'расскажи о себе':
-        bot.send_message(message.chat.id, 'Я новый бот! Я буду скидывать мемы, если ты попросишь. Пока я могу скидвать только 4-5 мема, но каждые 2-3 часа этот список обновляется!')
+        bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
