@@ -6,7 +6,7 @@ import re
 from selenium import webdriver
 import os
 import time
-from rate import rate
+#from rate import rate
 
 URL = 'https://www.reddit.com/r/memes/'
 HEADERS = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -92,7 +92,7 @@ def get_memes():
 
     return (memes.pop())
 
-'''
+
 def rate(): # Понятия не имею зачем это нужно
     USD_URL = 'https://finance.rambler.ru/currencies/USD/'
     EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
@@ -106,7 +106,7 @@ def rate(): # Понятия не имею зачем это нужно
     USD = re.sub("^\s+|\n|\r|\s+$", '', USD)
     EUR = re.sub("^\s+|\n|\r|\s+$", '', EUR)
     return str('$ {}\n'.format(USD))+str('€ {}\n'.format(EUR))+str('BTC {}'.format(BTC))
-'''
+
 
 
 
