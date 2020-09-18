@@ -92,7 +92,7 @@ def get_memes():
 
     return (memes.pop())
 
-
+'''
 def rate(): # Понятия не имею зачем это нужно
     USD_URL = 'https://finance.rambler.ru/currencies/USD/'
     EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
@@ -106,7 +106,7 @@ def rate(): # Понятия не имею зачем это нужно
     USD = re.sub("^\s+|\n|\r|\s+$", '', USD)
     EUR = re.sub("^\s+|\n|\r|\s+$", '', EUR)
     return str('$ {}\n'.format(USD))+str('€ {}\n'.format(EUR))+str('BTC {}'.format(BTC))
-
+'''
 
 
 
