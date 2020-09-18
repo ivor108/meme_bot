@@ -20,6 +20,7 @@ driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), c
 driver.get(URL)
 
 bot = telebot.TeleBot('1345384313:AAFfCxtgq-iici7UBN0C1A4YZ-ylxs1Z_cY')
+owm=pyowm.OWM('b396364a023ef1472520219031fce54e', language = 'ru')
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard1.row('Привет', 'мем', 'расскажи о себе', 'rate')
 
@@ -39,6 +40,24 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Обновление от 18.09.20  -Теперь можно смотреть курсы валют. -Количество подгружаемых мемов увеличено. -Скорость загрузки мема увеличена.')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
+    try:
+        observation = owm.weather_at_place(message.text)
+        w = observation.get_weather()
+        temp=w.get_temperature('celsius')['temp']
+
+        answer = f"В городе {message.text} сейчас {w.get_detailed_status()} \n"
+        answer += f"Температура в районе {round(temp)} градусов\n\n"
+
+        if temp<10:
+            answer += 'Очень холодно'
+        elif temp<17:
+            answer += 'Прохладно'
+        else:
+            answer += 'Не холодно'
+
+        bot.send_message(message.chat.id, answer)
+    except pyowm.exceptions.api_response_error.NotFoundError:
+        bot.send_message(message.chat.id, 'Город не найден :(')
 
 '''
 #Старые методы для парсинга
