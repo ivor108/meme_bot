@@ -35,7 +35,7 @@ def send_text(message):
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, get_memes())
     elif message.text.lower() == 'rate':
-        bot.send_message(message.chat.id, rate())
+        bot.send_message(message.chat.id, rate(HEADERS))
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
     else:
