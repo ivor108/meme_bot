@@ -32,38 +32,13 @@ def send_text(message):
     if message.text.lower() == 'привет':
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
-        bot.send_message(message.chat.id, get_memes())
+        bot.send_message(message.chat.id, random.choice(get_memes()))
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, rate(HEADERS))
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
-
-
-'''
-#Старые методы для парсинга
-def get_html(url, params=None):
-    r = requests.get(url, headers=HEADERS)
-    return r
-def get_memes():
-
-    html = get_html(URL)
-    if html.status_code == 200:
-        return (random.choice(get_content(html.text)))
-    else:
-        print('Ошибка!')
-        return (-1)
-def get_content (html):
-    soup = BeautifulSoup(html, 'html.parser')
-    memes = []
-    for items in soup.find_all(class_='_2_tDEnGMLxpM6uOa2kaDB3 ImageBox-image media-element _1XWObl-3b9tPy64oaG6fax'):
-        if str(items.get('src')).count('external') == 0:
-            memes.append(str(items.get('src')))
-    print(memes)
-    return (memes)
-'''
-
 
 def get_memes():
     memes = []
@@ -91,6 +66,6 @@ def get_memes():
             memes.append(str(mem))
             print(mem)
 
-    return (memes.pop())
+    return (memes)
 
 bot.polling()
