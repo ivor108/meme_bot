@@ -1,12 +1,9 @@
 import telebot
 import random
-import requests
-from bs4 import BeautifulSoup
-import re
 from selenium import webdriver
 import os
 import time
-from rate import rate
+from rate import get_rate
 from config import *
 
 chrome_options = webdriver.ChromeOptions()
@@ -34,7 +31,7 @@ def send_text(message):
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, random.choice(get_memes()))
     elif message.text.lower() == 'rate':
-        bot.send_message(message.chat.id, rate(HEADERS))
+        bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
     else:
