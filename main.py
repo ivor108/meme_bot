@@ -7,6 +7,7 @@ from selenium import webdriver
 import os
 import time
 from rate import rate
+from config import *
 
 URL = 'https://www.reddit.com/r/memes/'
 HEADERS = {
@@ -21,7 +22,7 @@ chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 driver.get(URL)
 
-bot = telebot.TeleBot('1345384313:AAFfCxtgq-iici7UBN0C1A4YZ-ylxs1Z_cY')
+bot = telebot.TeleBot(TOKEN)
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard1.row('Привет', 'мем', 'расскажи о себе', 'rate')
 
