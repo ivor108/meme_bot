@@ -11,7 +11,8 @@ chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 driver.get(URL)
 
-def get_memes(memes):
+def get_memes():
+    memes = []
     SCROLL_PAUSE_TIME = 0.5
     last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -32,3 +33,5 @@ def get_memes(memes):
         mem = element.get_attribute('src')
         if str(mem).count('external') == 0:
             memes.append(str(mem))
+
+    return (memes)

@@ -6,9 +6,9 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    config.MEMES.clear()
-    get_memes(config.MEMES)
+    #config.MEMES.clear()
+    #get_memes(config.MEMES)
     print('MEMES update!')
-    print(config.MEMES)
+    #print(config.MEMES)
 
 sched.start()
