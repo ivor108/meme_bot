@@ -1,11 +1,13 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 from main import bot
+from config import MEMES
+from memes import get_memes
 
 sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    print('This job is run every one minutes.')
-    #bot.send_message(414011250, 'я тут!')
+    MEMES = get_memes()
+    print('MEMES update!')
 
 sched.start()
