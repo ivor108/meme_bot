@@ -1,20 +1,9 @@
 import telebot
 import random
-from selenium import webdriver
-import os
-import time
 from rate import get_rate
 from memes import get_memes
 from config import *
-
-'''chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-driver.get(URL)'''
-
+from clock import MEMES
 
 bot = telebot.TeleBot(TOKEN)
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
@@ -31,8 +20,8 @@ def send_text(message):
     if message.text.lower() == 'привет':
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
-        get_memes()
         bot.send_message(message.chat.id, random.choice(get_memes()))
+        print(MEMES)
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
@@ -41,33 +30,5 @@ def send_text(message):
         bot.send_message(message.chat.id, message.chat.id)
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
-
-'''def get_memes():
-    memes = []
-    SCROLL_PAUSE_TIME = 0.5
-    last_height = driver.execute_script("return document.body.scrollHeight")
-
-    while True:
-        # Scroll down to bottom
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
-        # Wait to load page
-        time.sleep(SCROLL_PAUSE_TIME)
-
-        # Calculate new scroll height and compare with last scroll height
-        new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
-            break
-        last_height = new_height
-
-    elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
-
-    for element in elements:
-        mem = element.get_attribute('src')
-        if str(mem).count('external') == 0:
-            memes.append(str(mem))
-            print(mem)
-
-    return (memes)'''
 
 bot.polling()
