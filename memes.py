@@ -35,10 +35,14 @@ def get_memes():
                 memes.append(mem)
                 if cur.execute("SELECT COUNT(*) FROM memes WHERE meme_img = %s;", (mem,)) == 0:
                     cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
+                    print('Строка добавлена!')
+                print('Такая строка уже существует!')
 
     print(memes)
     print("--------------" + str(len(memes)))
     conn.commit()
     return memes
 
-
+def get_random_meme():
+    count = cur.execute("SELECT COUNT(*) FROM memes")
+    return cur.execute("SELECT meme_img FROM memes OFFSET floor(random()*%s) LIMIT 1;", (count,))
