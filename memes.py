@@ -34,6 +34,8 @@ def get_memes():
             mem = element.get_attribute('src')
             if str(mem).count('external') == 0:
                 memes.append(str(mem))
+                if len(memes) >= 100 and len(memes) < 200:
+                    break
 
     print(memes)
     print("--------------" + str(len(memes)))
