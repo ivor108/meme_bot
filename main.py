@@ -26,6 +26,10 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
     elif message.text.lower() == 'id':
         bot.send_message(message.chat.id, message.chat.id)
+    elif message.text.lower() == 'file':
+        MyFile = open('memes.txt', 'r')
+        meme = MyFile.readlines()
+        bot.send_message(message.chat.id, meme[0])
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
