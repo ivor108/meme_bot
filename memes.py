@@ -44,5 +44,5 @@ def get_memes():
     return memes
 
 def get_random_meme():
-    count = cur.execute("SELECT COUNT(*) FROM memes")
+    count = cur.execute("SELECT COUNT(*) FROM memes;")
     return cur.execute("SELECT meme_img FROM memes OFFSET floor(random()*%s) LIMIT 1;", (count,))
