@@ -33,11 +33,11 @@ def get_memes():
             mem = element.get_attribute('src')
             if str(mem).count('external') == 0:
                 memes.append(str(mem))
-                cur.execute("INSERT INTO memes(meme_img) VALUES (%s);", (str(mem),))
+                cur.execute("INSERT INTO memes(meme_img) VALUES ('test');")
 
     print(memes)
     print("--------------" + str(len(memes)))
+    conn.commit()
     return memes
 
 
-conn.commit()
