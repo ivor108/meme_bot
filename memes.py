@@ -30,10 +30,10 @@ def get_memes():
         for element in elements:
             if len(memes) >= 100:
                 break
-            mem = element.get_attribute('src')
-            if str(mem).count('external') == 0:
-                memes.append(str(mem))
-                cur.execute("INSERT INTO memes(meme_img) VALUES ('test');")
+            mem = str(element.get_attribute('src'))
+            if mem.count('external') == 0:
+                memes.append(mem)
+                cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
 
     print(memes)
     print("--------------" + str(len(memes)))
