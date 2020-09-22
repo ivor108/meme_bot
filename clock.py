@@ -1,14 +1,17 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 from memes import get_memes
 import config
+import random
 
 sched = BlockingScheduler()
-
+MEMES = []
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    #config.MEMES.clear()
-    #get_memes(config.MEMES)
+    global MEMES
+    MEMES = get_memes()
     print('MEMES update!')
-    #print(config.MEMES)
+
+def get_random_meme():
+    return random.choice(MEMES)
 
 sched.start()

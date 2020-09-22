@@ -3,6 +3,7 @@ import random
 from rate import get_rate
 from memes import get_memes
 from config import *
+from clock import get_random_meme
 
 bot = telebot.TeleBot(TOKEN)
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
@@ -19,7 +20,7 @@ def send_text(message):
     if message.text.lower() == 'привет':
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
-        bot.send_message(message.chat.id, random.choice(get_memes()))
+        bot.send_message(message.chat.id, get_random_meme())
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
