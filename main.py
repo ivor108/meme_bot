@@ -27,7 +27,7 @@ def send_text(message):
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, random.choice(get_memes()))
     elif message.text.lower() == 'мем2':
-        bot.send_message(message.chat.id, str(cur.execute("SELECT COUNT(*) FROM memes;")))
+        bot.send_message(message.chat.id, cur.execute("SELECT COUNT(*) FROM memes;"))
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
