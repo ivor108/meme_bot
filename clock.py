@@ -4,15 +4,14 @@ import config
 import random
 
 sched = BlockingScheduler()
-MEMES = []
-@sched.scheduled_job('interval', minutes=2)
+c = 0
+@sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    global MEMES
-    MEMES = get_memes()
+    global c
+    c = c + 1
     print('MEMES update!')
-    print(MEMES)
 
 def get_random_meme():
-    return random.choice(MEMES)
+    return random.choice(c)
 
 sched.start()
