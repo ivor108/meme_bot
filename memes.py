@@ -32,6 +32,7 @@ def get_memes():
     for element in elements:
         mem = element.get_attribute('src')
         if str(mem).count('external') == 0:
-            MEMES.append(str(mem))
+            memes.append(str(mem))
 
+    MEMES = memes
     return (memes)
