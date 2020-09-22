@@ -10,7 +10,8 @@ def timed_job():
     memes = get_memes()
     MyFile = open('memes.txt', 'w')
     for mem in memes:
-        print >>MyFile, mem
+        MyFile.write(mem)
+        MyFile.write('\n')
     MyFile.close()
     print('MEMES update!')
 
