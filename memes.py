@@ -31,6 +31,8 @@ def get_memes():
         elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
 
         for element in elements:
+            if len(memes) >= 100:
+                break
             mem = element.get_attribute('src')
             if str(mem).count('external') == 0:
                 memes.append(str(mem))
