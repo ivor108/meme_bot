@@ -32,7 +32,7 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
         get_memes()
-        bot.send_message(message.chat.id, random.choice(MEMES))
+        bot.send_message(message.chat.id, random.choice(get_memes()))
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':

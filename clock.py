@@ -1,5 +1,4 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
-from main import MEMES
 from memes import get_memes
 
 sched = BlockingScheduler()

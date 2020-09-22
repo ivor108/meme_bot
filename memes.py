@@ -34,5 +34,4 @@ def get_memes():
         if str(mem).count('external') == 0:
             memes.append(str(mem))
 
-    MEMES = memes
     return (memes)
