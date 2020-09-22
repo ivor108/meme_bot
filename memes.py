@@ -24,7 +24,7 @@ def get_memes():
         # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         #if new_height == last_height:
-        if len(memes) >= 100 and len(memes) < 200:
+        if len(memes) >= 100:
             break
         last_height = new_height
 
@@ -34,8 +34,6 @@ def get_memes():
             mem = element.get_attribute('src')
             if str(mem).count('external') == 0:
                 memes.append(str(mem))
-                if len(memes) >= 100 and len(memes) < 200:
-                    break
 
     print(memes)
     print("--------------" + str(len(memes)))
