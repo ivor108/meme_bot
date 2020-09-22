@@ -33,7 +33,8 @@ def get_memes():
             mem = str(element.get_attribute('src'))
             if mem.count('external') == 0:
                 memes.append(mem)
-                cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
+                if cur.execute("SELECT COUNT(*) FROM memes WHERE meme_img = %s;", (mem,)) == 0:
+                    cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
 
     print(memes)
     print("--------------" + str(len(memes)))
