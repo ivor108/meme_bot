@@ -8,7 +8,7 @@ sched = BlockingScheduler()
 def timed_job():
     config.MEMES.clear()
     config.MEMES = get_memes()
-    print('MEMES update!')
+    print('MEMES update! MEMS:' + config.MEMES.count())
     print(config.MEMES)
 
 sched.start()
