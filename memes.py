@@ -35,5 +35,5 @@ def get_memes():
             memes.append(str(mem))
 
     print(memes)
-    print("--------------" + len(memes))
+    print("--------------" + str(len(memes)))
     return memes
