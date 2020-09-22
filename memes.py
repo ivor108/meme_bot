@@ -16,7 +16,7 @@ def get_memes():
     SCROLL_PAUSE_TIME = 0.5
     last_height = driver.execute_script("return document.body.scrollHeight")
 
-    while True:
+    while len(memes) != 100:
         # Scroll down to bottom
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         # Wait to load page
@@ -24,8 +24,8 @@ def get_memes():
         # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         #if new_height == last_height:
-        if len(memes) >= 100:
-            break
+        #if len(memes) >= 100:
+        #    break
         last_height = new_height
 
         elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
