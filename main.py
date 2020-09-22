@@ -4,6 +4,12 @@ from rate import get_rate
 from memes import get_memes, get_random_meme
 from config import *
 
+import psycopg2
+import os
+
+conn = psycopg2.connect(os.environ.get("DATABASE_URL"), sslmode='require')
+cur = conn.cursor()
+
 bot = telebot.TeleBot(TOKEN)
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard1.row('Привет', 'мем', 'расскажи о себе', 'rate')
@@ -21,7 +27,7 @@ def send_text(message):
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, random.choice(get_memes()))
     elif message.text.lower() == 'мем2':
-        bot.send_message(message.chat.id, get_random_meme())
+        bot.send_message(message.chat.id, str(cur.execute("SELECT COUNT(*) FROM memes;")))
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
