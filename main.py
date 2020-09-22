@@ -6,7 +6,6 @@ import time
 from rate import get_rate
 from config import *
 
-print ('check!')
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
@@ -35,6 +34,8 @@ def send_text(message):
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
+    elif message.text.lower() == 'id':
+        bot.send_message(message.chat.id, message.chat.id)
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
