@@ -4,6 +4,7 @@ from selenium import webdriver
 import os
 import time
 from rate import get_rate
+from memes import get_memes
 from config import *
 
 chrome_options = webdriver.ChromeOptions()
@@ -39,7 +40,7 @@ def send_text(message):
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
-def get_memes():
+'''def get_memes():
     memes = []
     SCROLL_PAUSE_TIME = 0.5
     last_height = driver.execute_script("return document.body.scrollHeight")
@@ -65,6 +66,6 @@ def get_memes():
             memes.append(str(mem))
             print(mem)
 
-    return (memes)
+    return (memes)'''
 
 bot.polling()
