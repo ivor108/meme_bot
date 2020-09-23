@@ -19,6 +19,7 @@ def get_memes():
     memes = []
     SCROLL_PAUSE_TIME = 0.5
 
+    '''
     while True:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(SCROLL_PAUSE_TIME)
@@ -37,6 +38,20 @@ def get_memes():
                     cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
                     print('Строка добавлена!')
                 print('Такая строка уже существует!')
+    '''
+
+    elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
+
+    for element in elements:
+        if len(memes) >= 100:
+            break
+        mem = str(element.get_attribute('src'))
+        if mem.count('external') == 0:
+            memes.append(mem)
+            if cur.execute("SELECT COUNT(*) FROM memes WHERE meme_img = %s;", (mem,)) == 0:
+                cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
+                print('Строка добавлена!')
+            print('Такая строка уже существует!')
 
     print(memes)
     print("--------------" + str(len(memes)))
