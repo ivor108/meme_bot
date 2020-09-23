@@ -46,7 +46,7 @@ def get_memes():
 def get_random_meme():
     conn = psycopg2.connect(os.environ.get("DATABASE_URL"), sslmode='require')
     cur = conn.cursor()
-    #mem = str(cur.execute("SELECT meme_img FROM memes OFFSET floor(random()*(SELECT COUNT(*) FROM memes)) LIMIT 1;"))
-    cur.execute("SELECT COUNT(*) FROM memes;")
+    cur.execute("SELECT meme_img FROM memes OFFSET floor(random()*(SELECT COUNT(*) FROM memes)) LIMIT 1;")
+    #cur.execute("SELECT COUNT(*) FROM memes;")
     conn.commit()
     return str(cur.fetchone())
