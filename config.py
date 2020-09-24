@@ -1,5 +1,5 @@
 TOKEN = '1345384313:AAFfCxtgq-iici7UBN0C1A4YZ-ylxs1Z_cY'
-URL = 'https://www.reddit.com/r/memes/'
+URL = 'https://www.reddit.com/r/memes/new/'
 USD_URL = 'https://finance.rambler.ru/currencies/USD/'
 EUR_URL = 'https://finance.rambler.ru/currencies/EUR/'
 BTC_URL = 'https://ru.investing.com/crypto/bitcoin/btc-usd'
