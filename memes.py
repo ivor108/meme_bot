@@ -43,15 +43,15 @@ def get_memes():
     elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
 
     for element in elements:
-        if len(memes) >= 100:
-            break
+        #if len(memes) >= 100:
+        #    break
         mem = str(element.get_attribute('src'))
         if mem.count('external') == 0:
             memes.append(mem)
-            if cur.execute("SELECT COUNT(*) FROM memes WHERE meme_img = %s;", (mem,)) == 0:
-                cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
-                print('Строка добавлена!')
-            print('Такая строка уже существует!')
+            #if cur.execute("SELECT COUNT(*) FROM memes WHERE meme_img = %s;", (mem,)) == 0:
+            #    cur.execute("INSERT INTO memes(meme_img) VALUES(%s);", (mem,))
+            #    print('Строка добавлена!')
+            #print('Такая строка уже существует!')
 
     print(memes)
     print("--------------" + str(len(memes)))
