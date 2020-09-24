@@ -16,17 +16,17 @@ def get_memes():
     memes = []
     texts = []
     elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
-    elements2 = driver.find_elements_by_class_name('_eYtD2XCVieq6emjKBH3m')
+    #elements2 = driver.find_elements_by_class_name('_eYtD2XCVieq6emjKBH3m')
     for element in elements:
         mem = str(element.get_attribute('src'))
         if mem.count('external') == 0:
             memes.append(mem)
-    for element in elements2:
-        text = str(element.text)
-        texts.append(text)
+    #for element in elements2:
+    #    text = str(element.text)
+    #    texts.append(text)
 
     print(memes)
     print("--------------" + str(len(memes)))
-    print(texts)
+    #print(texts)
     return memes
 
