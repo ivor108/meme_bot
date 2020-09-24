@@ -23,7 +23,7 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     if message.text.lower() == 'привет':
-        bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
+        bot.send_message(message.chat.id, '!Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, random.choice(get_memes()))
     elif message.text.lower() == 'мем2':
