@@ -1,7 +1,7 @@
 import telebot
 import random
 from rate import get_rate
-from memes import get_memes, get_random_meme
+from memes import get_memes
 from config import *
 
 import psycopg2
