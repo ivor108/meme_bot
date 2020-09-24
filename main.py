@@ -6,6 +6,7 @@ from config import *
 
 import psycopg2
 import os
+import requests
 
 conn = psycopg2.connect(os.environ.get("DATABASE_URL"), sslmode='require')
 cur = conn.cursor()
@@ -32,6 +33,14 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
     elif message.text.lower() == 'id':
         bot.send_message(message.chat.id, message.chat.id)
+    elif message.text.lower() == 'test':
+        r = requests.get('https://preview.redd.it/ubxbvsy6a6p51.jpg?width=640&crop=smart&auto=webp&s=cc979c67732899b2ef2845025a02e866a0a2e17c')
+        with open('img.jpg', 'wb') as fd:
+            for chunk in r.iter_content(1):
+                fd.write(chunk)
+        photo = open('img.jpg', 'rb')
+        bot.send_photo(message.chat.id, photo)
+        os.remove('img.jpg')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
