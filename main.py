@@ -39,7 +39,7 @@ def send_text(message):
             for chunk in r.iter_content(1):
                 fd.write(chunk)
         photo = open('img.jpg', 'rb')
-        bot.send_photo(message.chat.id, photo)
+        bot.send_photo(message.chat.id, photo, caption='Raccoon vs. possum')
         os.remove('img.jpg')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
