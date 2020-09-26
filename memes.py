@@ -31,7 +31,7 @@ def get_memes():
     elements = driver.find_elements_by_class_name('_1poyrkZ7g36PawDueRza-J')
 
     for element in elements:
-        mem = str(element.find_element_by_class_name('_1XWObl-3b9tPy64oaG6fax').get_attribute('src'))
+        mem = str(element.find_element_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax').get_attribute('src'))
         text = get_text_excluding_children(driver, element.find_element_by_tag_name('h3'))
         if mem.count('external') == 0:
             memes.append(mem)
