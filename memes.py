@@ -13,14 +13,21 @@ driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), c
 def get_memes():
     driver.get(URL)
     memes = []
+    memes_text = []
     elements = driver.find_elements_by_class_name('_2_tDEnGMLxpM6uOa2kaDB3._1XWObl-3b9tPy64oaG6fax')
+    elements2 = driver.find_elements_by_class_name('_eYtD2XCVieq6emjKBH3m')
     while len(memes) < 25:
         for element in elements:
             mem = str(element.get_attribute('src'))
             if mem.count('external') == 0:
                 memes.append(mem)
+    while len(memes_text) < 25:
+        for element in elements2:
+            memes_text.append(str(element.text))
+
 
     print(memes)
+    print(memes_text)
     print("--------------" + str(len(memes)))
     return memes
 
