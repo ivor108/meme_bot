@@ -27,7 +27,8 @@ def get_memes():
 
 
     print(memes)
+    print("------------img: " + str(len(memes)))
     print(memes_text)
-    print("--------------" + str(len(memes)))
+    print("-----------text: " + str(len(memes_text)))
     return memes
 
