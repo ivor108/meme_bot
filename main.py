@@ -15,13 +15,13 @@ bot = telebot.TeleBot(TOKEN)
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard1.row('Привет', 'мем', 'расскажи о себе', 'rate')
 
-def send_mem(chatid, img_url, text):
-    r = requests.get(img_url)
+def send_mem(chatid, mem):
+    r = requests.get(mem[1])
     with open('img.jpg', 'wb') as fd:
         for chunk in r.iter_content(1):
             fd.write(chunk)
     photo = open('img.jpg', 'rb')
-    bot.send_photo(chatid, photo, caption=text)
+    bot.send_photo(chatid, photo, caption=mem[0])
     os.remove('img.jpg')
 
 @bot.message_handler(commands=['start'])
@@ -36,7 +36,7 @@ def send_text(message):
     elif message.text.lower() == 'мем':
         bot.send_message(message.chat.id, random.choice(get_memes()))
     elif message.text.lower() == 'мем2':
-        bot.send_message(message.chat.id, get_random_meme()[1])
+        send_mem(message.chat.id, get_random_meme())
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
@@ -44,7 +44,7 @@ def send_text(message):
     elif message.text.lower() == 'id':
         bot.send_message(message.chat.id, message.chat.id)
     elif message.text.lower() == 'test':
-        send_mem(message.chat.id, 'https://preview.redd.it/ubxbvsy6a6p51.jpg?width=640&crop=smart&auto=webp&s=cc979c67732899b2ef2845025a02e866a0a2e17c', 'Raccoon vs. possum')
+        send_mem(message.chat.id, ('Raccoon vs. possum', 'https://preview.redd.it/ubxbvsy6a6p51.jpg?width=640&crop=smart&auto=webp&s=cc979c67732899b2ef2845025a02e866a0a2e17c'))
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
