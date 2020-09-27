@@ -2,6 +2,7 @@ from selenium import webdriver
 import os
 from config import *
 import time
+import psycopg2
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -9,6 +10,9 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+conn = psycopg2.connect(os.environ.get("DATABASE_URL"), sslmode='require')
+cur = conn.cursor()
 
 def get_text_excluding_children(driver, element):
     return driver.execute_script("""
@@ -37,6 +41,8 @@ def get_memes():
         if mem.count('external') == 0:
             memes.append(mem)
             memes_text.append(text)
+            cur.execute("INSERT INTO memes(meme_text, meme_img, add_time) VALUES(%s, %s, date_trunc('hour', CURRENT_TIMESTAMP));", (text, mem))
+            conn.commit()
 
 
 
