@@ -3,6 +3,7 @@ import random
 from rate import get_rate
 from memes import get_memes, get_random_meme
 from config import *
+from apscheduler.schedulers.background import BackgroundScheduler
 
 import psycopg2
 import os
@@ -10,6 +11,8 @@ import requests
 
 conn = psycopg2.connect(os.environ.get("DATABASE_URL"), sslmode='require')
 cur = conn.cursor()
+
+sched = BackgroundScheduler()
 
 bot = telebot.TeleBot(TOKEN)
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
@@ -24,6 +27,11 @@ def send_mem(chatid, mem):
     bot.send_photo(chatid, photo, caption=mem[0])
     os.remove('img.jpg')
 
+@sched.scheduled_job('interval', minutes=1)
+def hello():
+    bot.send_message(414011250, '!Привет, я тут!')
+sched.start()
+
 @bot.message_handler(commands=['start'])
 def start_message(message):
     bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
@@ -34,8 +42,6 @@ def send_text(message):
     if message.text.lower() == 'привет':
         bot.send_message(message.chat.id, '!Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
-        bot.send_message(message.chat.id, random.choice(get_memes()))
-    elif message.text.lower() == 'мем2':
         send_mem(message.chat.id, get_random_meme())
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
@@ -47,6 +53,7 @@ def send_text(message):
         send_mem(message.chat.id, ('Raccoon vs. possum', 'https://preview.redd.it/ubxbvsy6a6p51.jpg?width=640&crop=smart&auto=webp&s=cc979c67732899b2ef2845025a02e866a0a2e17c'))
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
+
 
 
 bot.polling()
