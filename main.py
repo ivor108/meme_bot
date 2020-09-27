@@ -29,7 +29,8 @@ def send_mem(chatid, mem):
 
 @sched.scheduled_job('interval', minutes=1)
 def hello():
-    bot.send_message(414011250, '!Привет, я тут!')
+    #bot.send_message(414011250, '!Привет, я тут!')
+    print('!Привет, я тут!')
 sched.start()
 
 @bot.message_handler(commands=['start'])
