@@ -41,7 +41,10 @@ def get_memes():
         if mem.count('external') == 0:
             memes.append(mem)
             memes_text.append(text)
-            cur.execute("INSERT INTO memes(meme_text, meme_img, add_time) VALUES(%s, %s, date_trunc('hour', CURRENT_TIMESTAMP));", (text, mem))
+            if cur.execute("SELECT COUNT(*) FROM memes WHERE meme_img = %s;", (mem,)) == 0:
+                cur.execute("INSERT INTO memes(meme_text, meme_img, add_time) VALUES(%s, %s, date_trunc('hour', CURRENT_TIMESTAMP));", (text, mem))
+                print('Строка добавлена!')
+            print('Такая строка уже существует!')
             conn.commit()
 
 
@@ -52,3 +55,9 @@ def get_memes():
     print("-----------text: " + str(len(memes_text)))
     return memes
 
+def get_random_meme():
+    conn = psycopg2.connect(os.environ.get("DATABASE_URL"), sslmode='require')
+    cur = conn.cursor()
+    cur.execute("SELECT meme_img FROM memes OFFSET floor(random()*(SELECT COUNT(*) FROM memes)) LIMIT 1;")
+    conn.commit()
+    return str(cur.fetchone()[0])
