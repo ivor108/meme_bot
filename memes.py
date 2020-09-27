@@ -41,10 +41,7 @@ def get_memes():
         if mem.count('external') == 0:
             memes.append(mem)
             memes_text.append(text)
-            if cur.execute("SELECT COUNT(*) FROM memes WHERE meme_img = %s;", (mem,)) == 0:
-                cur.execute("INSERT INTO memes(meme_text, meme_img, add_time) VALUES(%s, %s, date_trunc('hour', CURRENT_TIMESTAMP));", (text, mem))
-                print('Строка добавлена!')
-            print('Такая строка уже существует!')
+            cur.execute("INSERT INTO memes(meme_text, meme_img, add_time) VALUES(%s, %s, date_trunc('hour', CURRENT_TIMESTAMP));", (text, mem))
             conn.commit()
 
 
@@ -53,6 +50,7 @@ def get_memes():
     print("------------img: " + str(len(memes)))
     print(memes_text)
     print("-----------text: " + str(len(memes_text)))
+    print(cur.execute('SELECT COUNT(*) FROM memes;'))
     return memes
 
 def get_random_meme():
