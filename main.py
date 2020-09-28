@@ -44,8 +44,12 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
-    elif message.text.lower() == 'топ мем':
-        send_mem(message.chat.id, get_top_meme())
+    elif message.text.lower().find('топ мем') > 0:
+        place = int(message.text.split(' ')[2])
+        if place > 3 or place < 1:
+            bot.send_message(message.chat.id, 'Необходимо ввести цифру от 1 до 3')
+        else:
+            send_mem(message.chat.id, get_top_meme(place))
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
