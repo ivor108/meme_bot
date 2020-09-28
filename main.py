@@ -1,7 +1,7 @@
 import telebot
 import random
 from rate import get_rate
-from memes import get_memes, get_random_meme
+from memes import get_memes, get_random_meme, get_top_meme
 from config import *
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -44,6 +44,8 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
+    elif message.text.lower == 'топ мем':
+        send_mem(message.chat.id, get_top_meme())
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':

@@ -58,3 +58,9 @@ def get_random_meme():
     cur.execute("SELECT meme_text, meme_img FROM memes OFFSET floor(random()*(SELECT COUNT(*) FROM memes)) LIMIT 1;")
     conn.commit()
     return cur.fetchone()
+
+def get_top_meme(place=1):
+    driver.get('https://www.reddit.com/r/memes/search?q=flair_name%3A%22%23' + str(place) + '%20MotW%22&restrict_sr=1&t=week')
+    img = driver.find_element_by_class_name('_13svhQIUZqD9PVzFcLwOKT').get_attribute('href')
+    text = driver.find_element_by_class_name('_eYtD2XCVieq6emjKBH3m').find_element_by_tag_name('span').text
+    return [text, img]
