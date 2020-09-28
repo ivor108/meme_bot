@@ -61,7 +61,7 @@ def send_text(message):
 
 def choice_place(message):
     if message.text.isdigit() == False:
-        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!')
+        bot.send_message(message.chat.id, 'Введи цифру (от 1 до 3)!')
     if message.text != '1' or message.text != '2' or message.text != '3':
         bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!')
     else:
