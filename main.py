@@ -60,12 +60,14 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Не понимаю!')
 
 def choice_place(message):
-    if message.text.isdigit() == False:
-        bot.send_message(message.chat.id, 'Введи цифру (от 1 до 3)!')
-    if message.text != '1' or message.text != '2' or message.text != '3':
-        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!')
+    if not message.text.isdigit():
+        bot.send_message(message.chat.id, 'Нужно ввести цифру')
     else:
-        send_mem(message.chat.id, get_top_meme(message.text))
+        if int(message.text) > 3 or int(message.text) < 1:
+            send_mem(message.chat.id, get_top_meme(message.text))
+        else:
+            bot.send_message(message.chat.id, 'от 1 до 3!')
+
 
 
 
