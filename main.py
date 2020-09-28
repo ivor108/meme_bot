@@ -16,7 +16,9 @@ sched = BackgroundScheduler()
 
 bot = telebot.TeleBot(TOKEN)
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
-keyboard1.row('Привет', 'мем', 'расскажи о себе', 'rate')
+keyboard2 = telebot.types.ReplyKeyboardMarkup(True)
+keyboard1.row('Привет', 'мем', 'топ мем', 'расскажи о себе', 'rate')
+keyboard2.row('1', '2', '3')
 
 def send_mem(chatid, mem):
     r = requests.get(mem[1])
@@ -24,7 +26,7 @@ def send_mem(chatid, mem):
         for chunk in r.iter_content(1):
             fd.write(chunk)
     photo = open('img.jpg', 'rb')
-    bot.send_photo(chatid, photo, caption=mem[0])
+    bot.send_photo(chatid, photo, caption=mem[0], reply_markup=keyboard1)
     os.remove('img.jpg')
 
 @sched.scheduled_job('interval', minutes=30)
@@ -45,26 +47,21 @@ def send_text(message):
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
     elif message.text.lower() == 'топ мем':
-        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!')
+        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!', reply_markup=keyboard2)
         bot.register_next_step_handler(message, choice_place)
-
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
-    elif message.text.lower() == 'id':
-        bot.send_message(message.chat.id, message.chat.id)
-    elif message.text.lower() == 'test':
-        send_mem(message.chat.id, ('Raccoon vs. possum', 'https://preview.redd.it/ubxbvsy6a6p51.jpg?width=640&crop=smart&auto=webp&s=cc979c67732899b2ef2845025a02e866a0a2e17c'))
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
 def choice_place(message):
     if not message.text.isdigit():
-        bot.send_message(message.chat.id, 'Нужно ввести цифру')
+        bot.send_message(message.chat.id, 'Нужно ввести цифру', reply_markup=keyboard1)
     else:
         if int(message.text) > 3 or int(message.text) < 1:
-            bot.send_message(message.chat.id, 'от 1 до 3!')
+            bot.send_message(message.chat.id, 'от 1 до 3!', reply_markup=keyboard1)
         else:
             send_mem(message.chat.id, get_top_meme(message.text))
 
