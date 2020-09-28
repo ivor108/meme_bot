@@ -27,10 +27,10 @@ def send_mem(chatid, mem):
     bot.send_photo(chatid, photo, caption=mem[0])
     os.remove('img.jpg')
 
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('interval', minutes=30)
 def hello():
-    #bot.send_message(414011250, '!Привет, я тут!')
-    print('!Привет, я тут!')
+    get_memes()
+    print('Memes uploaded!')
 sched.start()
 
 @bot.message_handler(commands=['start'])
@@ -41,7 +41,7 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     if message.text.lower() == 'привет':
-        bot.send_message(message.chat.id, '!Привет, я бот Максим, ты все понял!')
+        bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
     elif message.text.lower() == 'rate':
