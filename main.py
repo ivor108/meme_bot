@@ -45,11 +45,9 @@ def send_text(message):
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
     elif message.text.lower().find('топ мем') > 0:
-        place = int(message.text.split(' ')[2])
-        if place > 3 or place < 1:
-            bot.send_message(message.chat.id, 'Необходимо ввести цифру от 1 до 3')
-        else:
-            send_mem(message.chat.id, get_top_meme(place))
+        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!')
+        bot.register_next_step_handler(message, choice_place)
+
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
@@ -60,6 +58,14 @@ def send_text(message):
         send_mem(message.chat.id, ('Raccoon vs. possum', 'https://preview.redd.it/ubxbvsy6a6p51.jpg?width=640&crop=smart&auto=webp&s=cc979c67732899b2ef2845025a02e866a0a2e17c'))
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
+
+def choice_place(message):
+    if message.text.isdigit() == False:
+        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!')
+    if message.text != '1' or message.text != '2' or message.text != '3':
+        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!')
+    else:
+        send_mem(message.chat.id, get_top_meme(message.text))
 
 
 
