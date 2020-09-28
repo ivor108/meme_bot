@@ -64,9 +64,10 @@ def choice_place(message):
         bot.send_message(message.chat.id, 'Нужно ввести цифру')
     else:
         if int(message.text) > 3 or int(message.text) < 1:
-            send_mem(message.chat.id, get_top_meme(message.text))
-        else:
             bot.send_message(message.chat.id, 'от 1 до 3!')
+        else:
+            send_mem(message.chat.id, get_top_meme(message.text))
+
 
 
 
