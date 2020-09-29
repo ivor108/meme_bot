@@ -807,4 +807,4 @@ venv/Lib/site-packages/urllib3/util/wait.py
 venv/Scripts/
 
 venv/pyvenv.cfg
-!/config.py
+config.py
