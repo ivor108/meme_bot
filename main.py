@@ -14,7 +14,7 @@ cur = conn.cursor()
 
 sched = BackgroundScheduler()
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(os.environ.get("TOKEN"))
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard2 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard1.row('Привет', 'мем', 'топ мем', 'расскажи о себе', 'rate')
