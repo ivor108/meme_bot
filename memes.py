@@ -1,6 +1,5 @@
 from selenium import webdriver
 import os
-from config import *
 import time
 import psycopg2
 

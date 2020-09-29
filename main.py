@@ -1,8 +1,6 @@
 import telebot
-import random
 from rate import get_rate
 from memes import get_memes, get_random_meme, get_top_meme
-from config import *
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import psycopg2
@@ -52,7 +50,7 @@ def send_text(message):
     elif message.text.lower() == 'rate':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
-        bot.send_message(message.chat.id, 'Теперь можно смотреть курсы валют!')
+        bot.send_message(message.chat.id, 'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
