@@ -1,5 +1,6 @@
 import telebot
 from rate import get_rate
+from weather import weather
 from memes import get_memes, get_random_meme, get_top_meme
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -42,6 +43,9 @@ def start_message(message):
 def send_text(message):
     if message.text.lower() == 'привет':
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
+    elif message.text.lower() == 'погода':
+        bot.send_message(message.chat.id, 'Напиши свой город')
+        bot.register_next_step_handler(message, weather) #не будет скорее всего работать, сложно, там еще надо сслыку на бота давать через dialogflow
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
     elif message.text.lower() == 'топ мем':
