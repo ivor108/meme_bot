@@ -45,7 +45,7 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Привет, я бот Максим, ты все понял!')
     elif message.text.lower() == 'погода':
         bot.send_message(message.chat.id, 'Напиши свой город')
-        bot.register_next_step_handler(message, weather) #не будет скорее всего работать, сложно, там еще надо сслыку на бота давать через dialogflow
+        bot.register_next_step_handler(message, choice_city) #не будет скорее всего работать, сложно, там еще надо сслыку на бота давать через dialogflow
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
     elif message.text.lower() == 'топ мем':
@@ -68,7 +68,8 @@ def choice_place(message):
             send_mem(message.chat.id, get_top_meme(message.text))
 
 
-
+def choice_city(message):
+    bot.send_message(message.chat.id, weather(message.text))
 
 
 bot.polling()
