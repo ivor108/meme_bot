@@ -69,7 +69,7 @@ def choice_place(message):
 
 
 def choice_city(message):
-    bot.send_message(message.chat.id, get_weather())
+    bot.send_message(message.chat.id, get_weather(message.text))
 
 
 bot.polling()
