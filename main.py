@@ -50,15 +50,17 @@ def start_message(message):
 def send_text(message):
     if message.text.lower() == 'развлечения':
         bot.send_message(message.chat.id, 'В данный момент я могу только скидывать мемы', reply_markup=fun_keyboard)
+    elif message.text.lower() == 'мем':
+        send_mem(message.chat.id, get_random_meme())
+
     elif message.text.lower() == 'что происходит?':
         bot.send_message(message.chat.id, 'Ты можешь узнать курсы валют или прогноз погоды', reply_markup=news_keyboard)
+    elif message.text.lower() == 'что с рублем?':
+        bot.send_message(message.chat.id, get_rate(), reply_markup=main_keyboard)
     elif message.text.lower() == 'погода':
         bot.send_message(message.chat.id, 'Напиши свой город', reply_markup=city_keyboard)
         bot.register_next_step_handler(message, choice_city)
-    elif message.text.lower() == 'мем':
-        send_mem(message.chat.id, get_random_meme())
-    elif message.text.lower() == 'что с рублем?':
-        bot.send_message(message.chat.id, get_rate())
+
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     else:
