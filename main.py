@@ -1,6 +1,6 @@
 import telebot
 from rate import get_rate
-from weather import weather
+from weather import get_weather
 from memes import get_memes, get_random_meme, get_top_meme
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -69,7 +69,7 @@ def choice_place(message):
 
 
 def choice_city(message):
-    bot.send_message(message.chat.id, weather())
+    bot.send_message(message.chat.id, get_weather())
 
 
 bot.polling()
