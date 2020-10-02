@@ -1,7 +1,7 @@
 import requests
 import json
 from geopy.geocoders import Nominatim
-import os
+
 
 def get_weather(city):
 	geolocator = Nominatim(user_agent="weather-bot")
@@ -10,7 +10,7 @@ def get_weather(city):
 	lat = location.latitude
 	long = location.longitude
 
-	weather_req = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&appid={}'.format(lat, long, environ.get("WEATHER_KEY")))
+	weather_req = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&appid={}'.format(lat, long, 'b396364a023ef1472520219031fce54e'))
 
 	current_weather = json.loads(weather_req.text)['current']
 	temp = round(current_weather['temp'] - 273.15)
