@@ -64,7 +64,9 @@ def send_text(message):
         bot.send_message(message.chat.id, 'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     elif message.text.lower() == 'дота':
         best, worst = parsers('abaddon')
-        bot.send_message(message.chat.id, ','.join(best[0, :]))
+        bot.send_message(message.chat.id, best[0, 0])
+        bot.send_message(message.chat.id, best[0, 1])
+        bot.send_message(message.chat.id, best[0, 2])
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
