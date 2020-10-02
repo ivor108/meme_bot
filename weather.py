@@ -1,7 +1,7 @@
 import requests
 import json
 from geopy.geocoders import Nominatim
-
+import os
 
 def get_weather(city):
 	geolocator = Nominatim(user_agent="weather-bot")
