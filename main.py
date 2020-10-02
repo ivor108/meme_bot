@@ -1,7 +1,7 @@
 import telebot
 from rate import get_rate
 from weather import get_weather
-from memes import get_memes, get_random_meme, get_top_meme
+from memes import get_memes, get_random_meme
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import psycopg2
