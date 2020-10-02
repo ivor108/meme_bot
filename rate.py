@@ -14,4 +14,4 @@ def get_rate():
     req_BTC = requests.get(BTC_URL, headers=HEADERS)
     soup = BeautifulSoup(req_BTC.text, 'lxml')
     BTC = soup.find('span', class_='DFlfde SwHCTb')
-    return '$ {}₽\n'.format(USD) + '€ {}₽\n'.format(EUR) + '₿ {}₽'.format(BTC)
+    return '$ {}₽\n'.format(USD.text) + '€ {}₽\n'.format(EUR.text) + '₿ {}₽'.format(BTC.text)
