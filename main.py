@@ -17,7 +17,7 @@ bot = telebot.TeleBot(os.environ.get("TOKEN"))
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard2 = telebot.types.ReplyKeyboardMarkup(True)
 keyboard3 = telebot.types.ReplyKeyboardMarkup(True)
-keyboard1.row('Привет', 'мем','погода' 'расскажи о себе', 'Что с рублём?')
+keyboard1.row('Привет', 'мем','погода', 'расскажи о себе', 'Что с рублём?')
 keyboard2.row('1', '2', '3')
 keyboard3.row('Дубна', 'Москва', 'Санкт-Петербург')
 
