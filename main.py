@@ -50,24 +50,12 @@ def send_text(message):
         bot.register_next_step_handler(message, choice_city)
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
-'''    elif message.text.lower() == 'топ мем':
-        bot.send_message(message.chat.id, 'Выбери место в топе (от 1 до 3)!', reply_markup=keyboard2)
-        bot.register_next_step_handler(message, choice_place)'''
     elif message.text.lower() == 'что с рублём?':
         bot.send_message(message.chat.id, get_rate())
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
-
-'''def choice_place(message):
-    if not message.text.isdigit():
-        bot.send_message(message.chat.id, 'Нужно ввести цифру', reply_markup=keyboard1)
-    else:
-        if int(message.text) > 3 or int(message.text) < 1:
-            bot.send_message(message.chat.id, 'от 1 до 3!', reply_markup=keyboard1)
-        else:
-            send_mem(message.chat.id, get_top_meme(message.text))'''
 
 
 def choice_city(message):
