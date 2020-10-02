@@ -3,7 +3,7 @@ import json
 from geopy.geocoders import Nominatim
 
 
-def get_weather(city = 'Dubna'):
+def get_weather(city):
 	geolocator = Nominatim(user_agent="weather-bot")
 	location = geolocator.geocode(city)
 
