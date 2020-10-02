@@ -1,13 +1,17 @@
-
 from selenium import webdriver
+import os
 
-
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 def parsers(heroes):
     elem_text = []
     elem_text2 = []
     heroes = heroes.lower()
-    driver = webdriver.Firefox(executable_path=r'/usr/local/bin/geckodriver')
     driver.get("https://ru.dotabuff.com/heroes/" + heroes)
     elem_count = driver.find_elements_by_xpath("//div[@class = 'col-8']/section")
 
