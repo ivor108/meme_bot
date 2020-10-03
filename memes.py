@@ -27,7 +27,11 @@ def get_text_excluding_children(driver, element):
     """, element)
 
 def get_memes():
-    driver.get('https://www.reddit.com/r/memes/new/')
+    try:
+        driver.get('https://www.reddit.com/r/memes/new/')
+    except Exception as e:
+        print("[-] Can't get new memes: ", e)
+
     memes = []
     memes_text = []
     time.sleep(10)
