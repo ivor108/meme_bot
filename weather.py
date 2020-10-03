@@ -22,7 +22,7 @@ def get_weather(city):
 	except Exception as e:
 		print("[-] Can't get the weather: ", e)
 
-	if temp && feels_like && clouds && wind_speed:
+	if temp and feels_like and clouds and wind_speed:
 		return 'Сейчас температура воздуха - {} градусов, ощущается как {} градусов, облачность - {}%, скорость ветра - {}м/с'.format(str(temp), str(feels_like), str(clouds), str(wind_speed))
 	else:
 		print("[-] Something went wrong in weather class")

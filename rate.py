@@ -33,7 +33,7 @@ def get_rate():
 	except Exception as e:
 		print("[-] Can't get the BTC rate: ", e)
 
-	if USD && EUR && BTC:
+	if USD and EUR and BTC:
 		return '$ {}₽\n'.format(USD.text) + '€ {}₽\n'.format(EUR.text) + '₿ {}₽'.format(BTC.text)
 	else:
 		print("[-] Something went wrong in rate class")
