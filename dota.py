@@ -8,11 +8,11 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-def parsers(heroes):
+def get_best_wors_picks(hero):
     elem_text = []
     elem_text2 = []
-    heroes = heroes.lower()
-    driver.get("https://ru.dotabuff.com/heroes/" + heroes)
+    hero = hero.lower()
+    driver.get("https://ru.dotabuff.com/heroes/" + hero)
     elem_count = driver.find_elements_by_xpath("//div[@class = 'col-8']/section")
 
     if len(elem_count) == 7:
@@ -27,16 +27,16 @@ def parsers(heroes):
     elem.pop(0)
     elem2.pop(0)
 
-    for elemens in elem:
+    for element in elem:
         elem_cell = []
-        for j in elemens.find_elements_by_tag_name('td'):
+        for j in element.find_elements_by_tag_name('td'):
             elem_cell.append(j.text)
         del elem_cell[0]
         elem_text.append(elem_cell)
 
-    for elemens in elem2:
+    for element in elem2:
         elem_cell = []
-        for j in elemens.find_elements_by_tag_name('td'):
+        for j in element.find_elements_by_tag_name('td'):
             elem_cell.append(j.text)
         del elem_cell[0]
         elem_text2.append(elem_cell)

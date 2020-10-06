@@ -3,7 +3,7 @@ from rate import get_rate
 from weather import get_weather
 from memes import get_memes, get_random_meme
 from apscheduler.schedulers.background import BackgroundScheduler
-from parser import *
+from dota import *
 
 import psycopg2
 import os
@@ -63,7 +63,7 @@ def send_text(message):
     elif message.text.lower() == 'расскажи о себе':
         bot.send_message(message.chat.id, 'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     elif message.text.lower() == 'дота':
-        best, worst = parsers('abaddon')
+        best, worst = get_best_wors_picks('abaddon')
         bot.send_message(message.chat.id, best[0][0])
         bot.send_message(message.chat.id, best[0][1])
         bot.send_message(message.chat.id, best[0][2])
