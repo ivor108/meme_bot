@@ -22,7 +22,8 @@ fun_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 news_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 
 
-main_keyboard.row('Развлечения','Что происходит?', 'Расскажи о себе')
+
+main_keyboard.row('Развлечения', 'Что происходит?', 'Расскажи о себе')
 city_keyboard.row('Дубна', 'Москва', 'Санкт-Петербург')
 fun_keyboard.row('Мем') #сюда нужно еще что-нибудь добавить
 news_keyboard.row('Что с рублем?', 'Погода')
@@ -65,8 +66,10 @@ def send_text(message):
     elif message.text.lower() == 'дота':
         best, worst = get_best_wors_picks('abaddon')
         bot.send_message(message.chat.id, best[0][0])
-        bot.send_message(message.chat.id, best[0][1])
-        bot.send_message(message.chat.id, best[0][2])
+        bot.send_message(message.chat.id, best[1][0])
+        bot.send_message(message.chat.id, best[2][0])
+        bot.send_message(message.chat.id, best[3][0])
+        bot.send_message(message.chat.id, best[4][0])
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
