@@ -81,7 +81,7 @@ def choice_city(message):
 
 
 def choice_dota(message):
-    best, worst = get_best_wors_picks(message.text.lower())
+    best, worst = get_best_wors_picks(message.text)
     for i in range(len(best)):
 
         for j in range(len(best[0])):
