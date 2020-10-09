@@ -14,12 +14,11 @@ def get_best_wors_picks(hero):
     hero = hero.lower()
     try:
         driver.get("https://ru.dotabuff.com/heroes/" + hero)
+        elem_count = driver.find_elements_by_xpath("//div[@class = 'col-8']/section")
     except:
         return 'Не правильное имя героя'
-    elem_count = driver.find_elements_by_xpath("//div[@class = 'col-8']/section")
 
     if len(elem_count) == 7:
-
         elem = driver.find_element_by_xpath("//div[@class = 'col-8']/section[6]").find_elements_by_tag_name('tr')
         elem2 = driver.find_element_by_xpath("//div[@class = 'col-8']/section[7]").find_elements_by_tag_name('tr')
     else:
