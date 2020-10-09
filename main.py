@@ -81,18 +81,21 @@ def choice_city(message):
 
 
 def choice_dota(message):
-    best, worst = get_best_wors_picks(message.text)
-    str_best = ""
-    str_worst = ""
-    for i in range(len(best)):
+	try:
+	    best, worst = get_best_wors_picks(message.text)
+	    str_best = ""
+	    str_worst = ""
+	    for i in range(len(best)):
 
-        for j in range(len(best[0])):
-            str_best += best[i][j] + " "
-            str_worst += worst[i][j] + " "
-        str_best += "\n"
-        str_worst += "\n"
-    str_all ="Лучший пик\n" + str_best + "\nХудший пик\n" + str_worst
-    bot.send_message(message.chat.id, str_all,  reply_markup=main_keyboard)
+	        for j in range(len(best[0])):
+	            str_best += best[i][j] + " "
+	            str_worst += worst[i][j] + " "
+	        str_best += "\n"
+	        str_worst += "\n"
+	    str_all ="Лучший пик\n" + str_best + "\nХудший пик\n" + str_worst
+    	bot.send_message(message.chat.id, str_all,  reply_markup=main_keyboard)
+    except:
+    	bot.send_message(message.chat.id, 'Неправильное имя героя',  reply_markup=main_keyboard)
 
 
 bot.polling()
