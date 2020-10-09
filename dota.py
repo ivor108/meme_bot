@@ -8,10 +8,11 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
+
 def get_best_wors_picks(hero):
     elem_text = []
     elem_text2 = []
-    hero = hero.lower()
+
     driver.get("https://ru.dotabuff.com/heroes/" + hero)
     elem_count = driver.find_elements_by_xpath("//div[@class = 'col-8']/section")
 
@@ -22,7 +23,6 @@ def get_best_wors_picks(hero):
     else:
         elem = driver.find_element_by_xpath("//div[@class = 'col-8']/section[5]").find_elements_by_tag_name('tr')
         elem2 = driver.find_element_by_xpath("//div[@class = 'col-8']/section[6]").find_elements_by_tag_name('tr')
-
 
     elem.pop(0)
     elem2.pop(0)
@@ -44,5 +44,3 @@ def get_best_wors_picks(hero):
     elem_text.insert(0, ["Герой", "Преимущество", "ДоляПобед", "Матчи"])
     elem_text2.insert(0, ["Герой", "Невыгодное положение", "Доля Побед", "Матчи"])
     return elem_text, elem_text2
-
-

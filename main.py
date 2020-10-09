@@ -68,7 +68,7 @@ def send_text(message):
         bot.send_message(message.chat.id,
                          'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     elif message.text.lower() == 'дота':
-        bot.send_message(message.chat.id, 'Напиши героя')
+        bot.send_message(message.chat.id, 'Напиши имя  героя')
         bot.register_next_step_handler(message, choice_dota)
 
 
@@ -81,7 +81,7 @@ def choice_city(message):
 
 
 def choice_dota(message):
-    best, worst = get_best_wors_picks(message)
+    best, worst = get_best_wors_picks(message.text.lower())
     for i in range(len(best)):
 
         for j in range(len(best[0])):
@@ -89,7 +89,7 @@ def choice_dota(message):
             str_worst += worst[i][j] + " "
         str_best = "\n"
         str_worst = "\n"
-    str_all = str_best + "\n" + str_worst
+    str_all ="Лучший пик\n" + str_best + "Худший пик\n" + str_worst
     bot.send_message(message.chat.id, str_all)
 
 
