@@ -82,13 +82,13 @@ def choice_city(message):
 
 def choice_dota(message):
     best, worst = get_best_wors_picks(message.text)
+    
     for i in range(len(best)):
-
+        str_best = "\n"
+        str_worst = "\n"
         for j in range(len(best[0])):
             str_best += best[i][j] + " "
             str_worst += worst[i][j] + " "
-        str_best = "\n"
-        str_worst = "\n"
     str_all ="Лучший пик\n" + str_best + "Худший пик\n" + str_worst
     bot.send_message(message.chat.id, str_all)
 
