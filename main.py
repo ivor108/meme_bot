@@ -23,7 +23,7 @@ news_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 
 main_keyboard.row('Развлечения', 'Что происходит?', 'Расскажи о себе')
 city_keyboard.row('Дубна', 'Москва', 'Санкт-Петербург')
-fun_keyboard.row('Мем')  # сюда нужно еще что-нибудь добавить
+fun_keyboard.row('Мем', 'Дота')  # сюда нужно еще что-нибудь добавить
 news_keyboard.row('Что с рублем?', 'Погода')
 
 
@@ -92,7 +92,7 @@ def choice_dota(message):
         str_best += "\n"
         str_worst += "\n"
     str_all ="Лучший пик\n" + str_best + "\nХудший пик\n" + str_worst
-    bot.send_message(message.chat.id, str_all)
+    bot.send_message(message.chat.id, str_all,  reply_markup=main_keyboard)
 
 
 bot.polling()
