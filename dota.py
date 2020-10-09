@@ -41,6 +41,8 @@ def get_best_wors_picks(hero):
         del elem_cell[0]
         elem_text2.append(elem_cell)
     driver.close()
+    elem_text.insert(0, ["Герой", "Преимущество", "ДоляПобед", "Матчи"])
+    elem_text2.insert(0, ["Герой", "Невыгодное положение", "Доля Побед", "Матчи"])
     return elem_text, elem_text2
 
 

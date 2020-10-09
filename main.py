@@ -21,12 +21,11 @@ city_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 fun_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 news_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 
-
-
 main_keyboard.row('Развлечения', 'Что происходит?', 'Расскажи о себе')
 city_keyboard.row('Дубна', 'Москва', 'Санкт-Петербург')
-fun_keyboard.row('Мем') #сюда нужно еще что-нибудь добавить
+fun_keyboard.row('Мем')  # сюда нужно еще что-нибудь добавить
 news_keyboard.row('Что с рублем?', 'Погода')
+
 
 def send_mem(chatid, mem):
     r = requests.get(mem[1])
@@ -37,11 +36,15 @@ def send_mem(chatid, mem):
     bot.send_photo(chatid, photo, caption=mem[0], reply_markup=main_keyboard)
     os.remove('img.jpg')
 
+
 @sched.scheduled_job('interval', minutes=30)
 def hello():
     get_memes()
     print('Memes uploaded!')
+
+
 sched.start()
+
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
@@ -62,20 +65,32 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Напиши свой город', reply_markup=city_keyboard)
         bot.register_next_step_handler(message, choice_city)
     elif message.text.lower() == 'расскажи о себе':
-        bot.send_message(message.chat.id, 'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
+        bot.send_message(message.chat.id,
+                         'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     elif message.text.lower() == 'дота':
-        best, worst = get_best_wors_picks('abaddon')
-        bot.send_message(message.chat.id, best[0][0])
-        bot.send_message(message.chat.id, best[1][0])
-        bot.send_message(message.chat.id, best[2][0])
-        bot.send_message(message.chat.id, best[3][0])
-        bot.send_message(message.chat.id, best[4][0])
+        bot.send_message(message.chat.id, 'Напиши героя')
+        bot.register_next_step_handler(message, choice_dota)
+
+
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
 
 def choice_city(message):
     bot.send_message(message.chat.id, get_weather(message.text), reply_markup=main_keyboard)
+
+
+def choice_dota(message):
+    best, worst = get_best_wors_picks(message)
+    for i in range(len(best)):
+
+        for j in range(len(best[0])):
+            str_best += best[i][j] + " "
+            str_worst += worst[i][j] + " "
+        str_best = "\n"
+        str_worst = "\n"
+    str_all = str_best + "\n" + str_worst
+    bot.send_message(message.chat.id, str_all)
 
 
 bot.polling()
