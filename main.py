@@ -20,12 +20,13 @@ main_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 city_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 fun_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 news_keyboard = telebot.types.ReplyKeyboardMarkup(True)
+dota_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 
 main_keyboard.row('Развлечения', 'Что происходит?', 'Расскажи о себе')
 city_keyboard.row('Дубна', 'Москва', 'Санкт-Петербург')
 fun_keyboard.row('Мем', 'Дота')  # сюда нужно еще что-нибудь добавить
 news_keyboard.row('Что с рублем?', 'Погода')
-
+create_dota_keybord(dota_keyboard)
 
 def send_mem(chatid, mem):
     r = requests.get(mem[1])
@@ -68,7 +69,7 @@ def send_text(message):
         bot.send_message(message.chat.id,
                          'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     elif message.text.lower() == 'дота':
-        bot.send_message(message.chat.id, 'Напиши имя  героя')
+        bot.send_message(message.chat.id, 'Напиши имя  героя', reply_markup=dota_keyboard)
         bot.register_next_step_handler(message, choice_dota)
 
 

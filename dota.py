@@ -44,4 +44,17 @@ def get_best_wors_picks(hero):
     elem_text2.insert(0, ["Герой", "Невыгодное положение", "Доля Побед", "Матчи"])
     return elem_text, elem_text2
 
-
+def create_dota_keybord(keyboard):
+    with open('heroes.txt') as f:
+        thelist = f.readlines()
+    i = 0
+    tmp = []
+    for hero in thelist:
+        tmp.append(hero.replace('\n', ''))
+        if i%8 == 7 or i == len(thelist)-1:
+            if len(tmp) == 8:
+                keyboard.row(tmp[0], tmp[1], tmp[2], tmp[3], tmp[4], tmp[5], tmp[6], tmp[7])
+            else:
+                keyboard.row(tmp[0], tmp[1], tmp[2], tmp[3], tmp[4], tmp[5], tmp[6])
+            tmp = []
+        i+=1
