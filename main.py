@@ -89,8 +89,8 @@ def choice_dota(message):
         for j in range(len(best[0])):
             str_best += best[i][j] + " "
             str_worst += worst[i][j] + " "
-        str_best = "\n"
-        str_worst = "\n"
+        str_best += "\n"
+        str_worst += "\n"
     str_all ="Лучший пик\n" + str_best + "\nХудший пик\n" + str_worst
     bot.send_message(message.chat.id, str_all)
 
