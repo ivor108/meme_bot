@@ -4,6 +4,7 @@ from weather import get_weather
 from memes import get_memes, get_random_meme
 from apscheduler.schedulers.background import BackgroundScheduler
 from dota import *
+from covid import *
 
 import psycopg2
 import os
@@ -21,11 +22,13 @@ city_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 fun_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 news_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 dota_keyboard = telebot.types.ReplyKeyboardMarkup(True)
+covid_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 
 main_keyboard.row('Развлечения', 'Что происходит?', 'Расскажи о себе')
 city_keyboard.row('Дубна', 'Москва', 'Санкт-Петербург')
 fun_keyboard.row('Мем', 'Дота')  # сюда нужно еще что-нибудь добавить
-news_keyboard.row('Что с рублем?', 'Погода')
+news_keyboard.row('Что с рублем?', 'Погода', 'Covid-19')
+covid_keyboard.row('Сша', 'Россия', 'Италия', 'Япония')
 create_dota_keybord(dota_keyboard)
 
 def send_mem(chatid, mem):
@@ -69,10 +72,11 @@ def send_text(message):
         bot.send_message(message.chat.id,
                          'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
     elif message.text.lower() == 'дота':
-        bot.send_message(message.chat.id, 'Напиши имя  героя', reply_markup=dota_keyboard)
+        bot.send_message(message.chat.id, 'Напиши имя героя', reply_markup=dota_keyboard)
         bot.register_next_step_handler(message, choice_dota)
-
-
+    elif message.text.lower() == 'covid-19':
+        bot.send_message(message.chat.id, 'Выбери страну', reply_markup=covid_keyboard)
+        bot.register_next_step_handler(message, choice_country)
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
@@ -97,6 +101,10 @@ def choice_dota(message):
         bot.send_message(message.chat.id, str_all,  reply_markup=main_keyboard)
     except:
         bot.send_message(message.chat.id, 'Неправильное имя героя',  reply_markup=main_keyboard)
+
+def choice_country(message):
+    bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAIgT1-A4QeHcYRTjLeh7Q35tkpYaU2IAAIZBgACu-LZS7x-ZyzJUUkPGwQ')
+    bot.send_message(message.chat.id, getcorona(message.text), reply_markup=main_keyboard)
 
 
 bot.polling()
