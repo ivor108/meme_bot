@@ -58,11 +58,11 @@ def start_message(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     if message.text.lower() == 'развлечения':
-        bot.send_message(message.chat.id, 'В данный момент я могу только скидывать мемы', reply_markup=fun_keyboard)
+        bot.send_message(message.chat.id, 'В данный момент я могу скидывать мемы и информацию о доте', reply_markup=fun_keyboard)
     elif message.text.lower() == 'мем':
         send_mem(message.chat.id, get_random_meme())
     elif message.text.lower() == 'что происходит?':
-        bot.send_message(message.chat.id, 'Ты можешь узнать курсы валют или прогноз погоды', reply_markup=news_keyboard)
+        bot.send_message(message.chat.id, 'Ты можешь узнать курсы валют, прогноз погоды и информацию о Covid-19', reply_markup=news_keyboard)
     elif message.text.lower() == 'что с рублем?':
         bot.send_message(message.chat.id, get_rate(), reply_markup=main_keyboard)
     elif message.text.lower() == 'погода':
@@ -102,8 +102,10 @@ def choice_dota(message):
         bot.send_message(message.chat.id, 'Неправильное имя героя',  reply_markup=main_keyboard)
 
 def choice_country(message):
-    bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAIgT1-A4QeHcYRTjLeh7Q35tkpYaU2IAAIZBgACu-LZS7x-ZyzJUUkPGwQ')
-    bot.send_message(message.chat.id, getcorona(message.text), reply_markup=main_keyboard)
-
+    try:
+        bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAIgT1-A4QeHcYRTjLeh7Q35tkpYaU2IAAIZBgACu-LZS7x-ZyzJUUkPGwQ')
+        bot.send_message(message.chat.id, getcorona(message.text), reply_markup=main_keyboard)
+    except:
+        bot.send_message(message.chat.id, 'Ошибка библиотеки',  reply_markup=main_keyboard)
 
 bot.polling()

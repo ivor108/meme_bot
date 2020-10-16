@@ -4,6 +4,7 @@ from covid19_data import JHU
 def getcorona(country):
     final_message = ""
     get_message_bot = country
+
     if get_message_bot == "Сша":
         final_message = "🇺🇸Данные по США: " + "\n🦠Заболевшие: " + str(JHU.US.confirmed) + "\n☠️Умершие: " + str(JHU.US.deaths) + "\n💊Выздоровевшие: " + str(JHU.US.recovered)
 
