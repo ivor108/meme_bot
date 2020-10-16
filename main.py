@@ -69,8 +69,7 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Напиши свой город', reply_markup=city_keyboard)
         bot.register_next_step_handler(message, choice_city)
     elif message.text.lower() == 'расскажи о себе':
-        bot.send_message(message.chat.id,
-                         'У меня новое обновление! Мемы загружаются быстрее. Теперь я могу скидывать топ мемов недели!')
+        bot.send_message(message.chat.id, 'Привет, я могу скидывать мемы. Так же у меня можно узнать актуальные новости и посмотреть какого героя выбрать в доте!')
     elif message.text.lower() == 'дота':
         bot.send_message(message.chat.id, 'Напиши имя героя', reply_markup=dota_keyboard)
         bot.register_next_step_handler(message, choice_dota)
