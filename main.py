@@ -27,7 +27,7 @@ covid_keyboard = telebot.types.ReplyKeyboardMarkup(True)
 main_keyboard.row('Развлечения', 'Что происходит?', 'Расскажи о себе')
 city_keyboard.row('Дубна', 'Москва', 'Санкт-Петербург')
 fun_keyboard.row('Мем', 'Дота')  # сюда нужно еще что-нибудь добавить
-news_keyboard.row('Что с рублем?', 'Погода', 'Covid-19')
+news_keyboard.row('Что с рублем?', 'Погода')
 covid_keyboard.row('Сша', 'Россия', 'Италия', 'Япония')
 create_dota_keybord(dota_keyboard)
 
@@ -73,9 +73,6 @@ def send_text(message):
     elif message.text.lower() == 'дота':
         bot.send_message(message.chat.id, 'Напиши имя героя', reply_markup=dota_keyboard)
         bot.register_next_step_handler(message, choice_dota)
-    elif message.text.lower() == 'covid-19':
-        bot.send_message(message.chat.id, 'Выбери страну', reply_markup=covid_keyboard)
-        bot.register_next_step_handler(message, choice_country)
     else:
         bot.send_message(message.chat.id, 'Не понимаю!')
 
