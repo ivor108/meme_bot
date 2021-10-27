@@ -4,7 +4,7 @@ from weather import get_weather
 from memes import get_memes, get_random_meme
 from apscheduler.schedulers.background import BackgroundScheduler
 from dota import *
-from covid import *
+#from covid import *
 
 import psycopg2
 import os
@@ -104,7 +104,7 @@ def choice_dota(message):
 def choice_country(message):
     try:
         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAIgT1-A4QeHcYRTjLeh7Q35tkpYaU2IAAIZBgACu-LZS7x-ZyzJUUkPGwQ')
-        bot.send_message(message.chat.id, getcorona(message.text), reply_markup=main_keyboard)
+        #bot.send_message(message.chat.id, getcorona(message.text), reply_markup=main_keyboard)
     except:
         bot.send_message(message.chat.id, 'Ошибка библиотеки',  reply_markup=main_keyboard)
 
